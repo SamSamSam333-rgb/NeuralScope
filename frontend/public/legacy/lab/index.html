@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuralScope Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="help.css">
+<script src="../../vendor/three.min.js"></script>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">NEURALSCOPE LAB</div>
+  <div class="badge">UI DEMO · SAMPLE SCENE · TEACHING SKETCH</div>
+  <div class="spacer"></div>
+  <div class="grp"><span>Explain</span><div class="seg" role="group" aria-label="Explanation language">
+    <button type="button" id="m-simple" aria-pressed="true">Simple</button><button type="button" id="m-tech" aria-pressed="false">Technical</button></div></div>
+  <div class="grp"><span>Motion</span><div class="seg" role="group" aria-label="Animations">
+    <button type="button" id="mo-on" aria-pressed="true">On</button><button type="button" id="mo-off" aria-pressed="false">Off</button></div></div>
+</header>
+<div id="vihost" style="padding:8px 16px;max-width:1500px;margin:0 auto"></div>
+<main>
+  <div class="col">
+    <section class="panel" aria-labelledby="l-ask"><h2 class="lbl" id="l-ask">Ask about the image</h2>
+      <form class="ask" id="askform" autocomplete="off"><input id="q" type="text" aria-label="Question about the image" placeholder="How many people are there?"><button class="btn primary" type="submit">Ask</button></form>
+      <div class="chips" id="chips"><button type="button" class="chip">How many people?</button><button type="button" class="chip">What is the biggest object?</button><button type="button" class="chip">What is on the left?</button><button type="button" class="chip">List everything</button></div>
+      <div id="answer" aria-live="polite"></div></section>
+    <section class="panel" aria-labelledby="l-scene"><h2 class="lbl" id="l-scene">Sample scene (illustration). Click a box or a tile.</h2>
+      <div class="scenewrap"><canvas id="scene" width="640" height="400" aria-label="Sample scene. Click a detection box or a tile; the list below also selects detections."></canvas></div>
+      <div class="range"><label for="thr" class="tag">CUTOFF</label><input id="thr" type="range" min="5" max="95" step="5" value="30"><output id="throut" for="thr">0.30</output></div>
+      <p class="small" id="cutnote" aria-live="polite"></p>
+      <p class="small muted">The <button type="button" class="term" data-term="cutoff">cutoff slider</button> only decides which results you see; it never changes the model.</p>
+      <div class="row" style="margin-top:8px"><button class="btn" type="button" id="rescan">Re-scan</button></div>
+      <div class="dlist" id="dlist" role="group" aria-label="Detections"></div>
+      <p class="small muted" style="margin-top:8px">Each row: object · <button type="button" class="term" data-term="confidence">score (e.g. 0.92)</button> · <button type="button" class="term" data-term="shown">shown / hidden</button></p></section>
+  </div>
+  <section class="panel center" aria-labelledby="l-pipe"><h2 class="lbl" id="l-pipe">Neural pipeline: pixels in, answer out</h2>
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-label="Interactive 3D map of the pipeline. Use the stage buttons below for keyboard access."></canvas>
+      <div class="hint">DRAG ORBIT · WHEEL ZOOM · CLICK ANYTHING</div>
+      <div class="hud"><div class="h"><button type="button" class="term" data-term="confidence">LIVE CONFIDENCE</button> (click a bar)</div><div id="hud"></div></div>
+      <div class="legend">
+        <button type="button" data-term="dot"><i style="background:var(--cyan);height:8px;border-radius:50%;width:8px"></i>dot</button>
+        <button type="button" data-term="wire"><i style="background:var(--cyan)"></i>boosts</button>
+        <button type="button" data-term="weight"><i style="background:var(--pink)"></i>suppresses</button>
+        <button type="button" data-term="cut"><i style="background:var(--red)"></i>cut / muted</button>
+        <button type="button" data-term="spark">sparks</button>
+      </div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="nogl" id="nogl">This browser could not start 3D graphics. The scene, prompt and inspector still work; use the stage buttons below.</div>
+    </div>
+    <div class="stagenav" id="stagenav" role="group" aria-label="Pipeline stages"></div></section>
+  <div class="col">
+    <section class="panel" aria-labelledby="l-insp"><h2 class="lbl" id="l-insp">Inspector: what is this?</h2><div id="insp"></div></section>
+    <section class="panel" aria-labelledby="l-chg"><h2 class="lbl" id="l-chg">What changed</h2><div id="chg" aria-live="polite"></div>
+      <div class="row" style="margin-top:8px"><button class="btn" type="button" id="reset">Restore everything</button></div></section>
+    <section class="panel"><details><summary>Glossary (every term)</summary><div class="chiprow" id="gloss" style="margin-top:8px"></div></details></section>
+  </div>
+</main>
+</div>
+<script src="sim.js"></script><script src="content.js"></script><script src="learn.js"></script><script src="art.js"></script><script src="core.js"></script>
+<script src="scene.js"></script><script src="inspector.js"></script><script src="labs.js"></script><script src="view3d.js"></script><script src="main.js"></script><script src="help.js"></script><script src="help_vision.js"></script><script>try{NSH.mount(document.querySelector(".app"),"vi",document.getElementById("vihost"));}catch(e){}</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+numpy>=1.26
+scikit-learn>=1.4
+pillow>=10.0
+pi-heif
+ultralytics>=8.3
+# PyTorch is installed separately by setup.bat / setup.sh so you get the right build for your GPU:
+#   NVIDIA (RTX 4050):  pip install torch --index-url https://download.pytorch.org/whl/cu124
+#   CPU only:           pip install torch
+# test-only
+pytest>=8.0
+httpx>=0.27
